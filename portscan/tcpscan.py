@@ -37,7 +37,7 @@ class SYNScan(Scanner):
         src_port = RandShort()
         resp = sr1(IP(dst=self.targetip)/TCP(sport=src_port, dport=port, flags="S"), verbose=False, timeout=5)
         if str(type(resp)) == "<type 'NoneType'>":
-            self.results[port] = "Open | Filterd"
+            self.results[port] = "Open | filtered"
         elif resp.haslayer(TCP):
             if resp.getlayer(TCP).flags == 0x12:
                 rst = sr1(IP(dst=self.targetip)/TCP(sport=src_port, dport=port, flags="R"), verbose=False, timeout=5)
@@ -53,10 +53,10 @@ class ACKScan(Scanner):
         src_port = RandShort()
         resp = sr1(IP(dst=self.targetip)/TCP(sport=src_port, dport=port, flags="A"), verbose=False, timeout=5)
         if str(type(resp)) == "<type 'NoneType'>":
-            self.results[port] = "Filterd (Statefull)"
+            self.results[port] = "Filtered (Statefull)"
         elif resp.haslayer(TCP):
             if resp.getlayer(TCP).flags == 0x4:
-                self.results[port] = "Unfilterd"
+                self.results[port] = "Unfiltered"
         elif resp.haslayer(ICMP):
             if int(resp.getlayer(ICMP).type) == 3 and int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]:
                 self.results[port] = "Filtered (Statefull)"
@@ -66,7 +66,7 @@ class FINScan(Scanner):
         src_port = RandShort()
         resp = sr1(IP(dst=self.targetip)/TCP(sport=src_port, dport=port, flags="F"), verbose=False, timeout=5)
         if str(type(resp)) == "<type 'NoneType'>":
-            self.results[port] = "Open | Filterd"
+            self.results[port] = "Open | Filtered"
         elif resp.haslayer(TCP):
             if resp.getlayer(TCP).flags == 0x14:
                 self.results[port] = "Closed"
@@ -79,7 +79,7 @@ class XMASScan(Scanner):
         src_port = RandShort()
         resp = sr1(IP(dst=self.targetip)/TCP(sport=src_port, dport=port, flags="FPU"), verbose=False, timeout=5)
         if str(type(resp)) == "<type 'NoneType'>":
-            self.results[port] = "Open | Filterd"
+            self.results[port] = "Open | Filtered"
         elif resp.haslayer(TCP):
             if resp.getlayer(TCP).flags == 0x14:
                 self.results[port] = "Closed"
@@ -92,7 +92,7 @@ class NULLScan(Scanner):
         src_port = RandShort()
         resp = sr1(IP(dst=self.targetip)/TCP(sport=src_port, dport=port, flags=""), verbose=False, timeout=5)
         if str(type(resp)) == "<type 'NoneType'>":
-            self.results[port] = "Open | Filterd"
+            self.results[port] = "Open | Filtered"
         elif resp.haslayer(TCP):
             if resp.getlayer(TCP).flags == 0x14:
                 self.results[port] = "Closed"

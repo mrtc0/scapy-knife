@@ -80,11 +80,11 @@ Scanned 82 ports, Closed 80 ports. 192.168.1.109
 WARNING: No route found for IPv6 destination :: (no default route?)
 [*]Result for 192.168.1.109 
     Port         State
-    22           Unfilterd
-    80           Unfilterd
-    443          Unfilterd
+    22           Unfiltered
+    80           Unfiltered
+    443          Unfiltered
     12345        Filtered (Statefull)
-    25252        Filterd (Statefull)
+    25252        Filtered (Statefull)
 Scanned 5 ports, Closed 0 ports. 192.168.1.109
 ```
   
