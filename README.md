@@ -88,5 +88,44 @@ WARNING: No route found for IPv6 destination :: (no default route?)
 Scanned 5 ports, Closed 0 ports. 192.168.1.109
 ```
   
+### ReturnSA.py
+
+パケット全てにSYN, ACKを返します.  
+なのでSYNスキャンではすべてのポートが開いているように見えます.  
+OSがRST, ACKを返さないようにiptablesを設定しておく必要があります.  
+  
+```
+# iptables -A OUTPUT -p tcp --tcp-flags ALL RST,ACK -d 192.168.1.101 -j DROP
+# ./returnSA.py
+```
+  
+```
+# nmap -sS 192.168.11.14                                                                                                                  
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2015-03-04 20:22 JST
+Nmap scan report for 192.168.1.101
+Host is up (4.2s latency).
+PORT      STATE SERVICE
+1/tcp     open  tcpmux
+3/tcp     open  compressnet
+4/tcp     open  unknown
+6/tcp     open  unknown
+7/tcp     open  echo
+9/tcp     open  discard
+13/tcp    open  daytime
+17/tcp    open  qotd
+19/tcp    open  chargen
+20/tcp    open  ftp-data
+21/tcp    open  ftp
+22/tcp    open  ssh
+23/tcp    open  telnet
+24/tcp    open  priv-mail
+25/tcp    open  smtp
+26/tcp    open  rsftp
+30/tcp    open  unknown
+32/tcp    open  unknown
+33/tcp    open  dsp
+~ snip ~
+```
 
 
