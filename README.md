@@ -96,6 +96,9 @@ OSがRST, ACKを返さないようにiptablesを設定しておく必要があ�
   
 ```
 # iptables -A OUTPUT -p tcp --tcp-flags ALL RST,ACK -d 192.168.1.101 -j DROP
+# netstat -antp
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
 # ./returnSA.py
 ```
   
